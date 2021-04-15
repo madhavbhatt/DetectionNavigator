@@ -1,0 +1,29 @@
+apt update
+apt upgrade -y
+apt dist-upgrade -y
+apt autoremove -y
+apt autoclean -y
+apt clean -y
+apt install apache2 -y
+apt install python3 -y
+apt install python3-pip -y
+apt install python3-django -y
+apt install python3-mysqldb -y
+apt install libapache2-mod-wsgi-py3 -y
+apt install mysql-server -y
+apt install mysql-client -y
+apt install net-tools -y
+pip3 -r requirements.txt
+
+
+# Install Docker from here : https://docs.docker.com/engine/install/ubuntu/
+apt update
+apt remove docker docker-engine docker.io containerd runc -y
+apt upgrade -y
+apt dist-upgrade -y
+apt autoremove -y
+apt autoclean -y
+apt clean -y
+apt install apt-transport-https ca-certificates curl gnupg lsb-release -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+apt install docker-ce docker-ce-cli containerd.io -y

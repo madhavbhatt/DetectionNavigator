@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<title>MITRE ATT&CK</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/static/admin/js/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style>
+
+html, body { height: 100% }
+div.scrollmenu {
+  white-space: nowrap;
+  min-height: 100%;
+  padding-left:350px;
+  padding-top: 28px;
+}
+table {
+  font-family: arial, sans-serif;
+  border: 1px solid #A52A2A;
+  border-collapse: separate;
+}
+th {
+
+  text-align: center;
+  padding: 8px;
+  background-color:#ffe9c6;
+    border: 1px solid #A52A2A;
+}
+td {
+  max-width: 195px;
+  text-overflow: ellipsis;
+  overflow:hidden;
+  border: 1px solid #A52A2A;
+}
+.button {
+  background-color: #000000;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight:bold;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 10px 1px;
+  width:400px;
+}
+
+.w3-show-block,.w3-show{
+    display:block!important
+    }
+
+.w3-dropdown-click,.w3-dropdown-hover{
+    position:relative;
+    display:inline-block;
+    cursor:pointer
+    }
+
+.w3-dropdown-content{
+    cursor:auto;
+    color:#000;
+    background-color:#fff;
+    display:none;
+    position:absolute;
+    min-width:160px;
+    margin:0;
+    padding:0;
+    z-index:1
+    }
+
+.red {
+    background-color:Crimson;
+}
+
+.orange {
+    background-color:DarkOrange;
+
+}
+
+.green {
+    background-color:lightgreen;
+
+}
+.grey {
+    background-color:lightgrey;
+}
+.expand-small-on-hover:hover {
+  max-width : 200px;
+  text-overflow: ellipsis;
+}
+
+.red:hover,.orange:hover,.green:hover,.grey:hover,.expand-maximum-on-hover:hover {
+  max-width : initial;
+
+}
+
+.sidenav {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+  padding-left:20px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+</style>
+</head>
+<body>
+{% load static %}
+{% load customtag %}
+<div class="scrollmenu">
+    {% for x in ttp %}
+    {% if x.FuncTact != "Rec" and x.FuncTact != "Res" %}
+    <div id="{{ x.FuncTact }}-1" class="w3-dropdown-click">
+        <button id="{{ x.FuncTact }}-2" onclick="{{ x.FuncTact }}()" class="button">{{ x.Tactic }}</button>
+        <div id="{{ x.FuncTact }}" class="w3-dropdown-content w3-bar-block w3-card-4 w3-animate-zoom">
+            <table id="{{ x.FuncTact }}-5" onmouseover="{{ x.FuncTact }}3()" onmouseout="{{ x.FuncTact }}4()">
+                <tr><th colspan="2">{{ x.Tactic }}</th></tr>
+                {% for y in tech %}
+                    {% ifequal x.id y.tactic_id %}
+                        {% if y.techniqueRepeat > 1 %}
+                            <tr><td id="{{ y.techniqueId }}" rowspan="{{ y.techniqueRepeat }}" onclick="toggleHighlight()" style="background-color:{{ y.techColor }}">{{ y.techniqueName }}</td></tr>
+                        {% else %}
+                            <tr><td id="{{ y.techniqueId }}" onclick="toggleHighlight()" style="background-color:{{ y.techColor }}">{{ y.techniqueName }}</td></tr>
+                        {% endif %}
+                    {% endifequal %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+<div class="sidenav">
+         <h1 style="color: white;">MITRE ATT&CK</h1>
+        <a title="download payload" href="{% url 'downloadToExcel' %}">Download To Excel</a>
+        <a title="updateDatabase" href="{% url 'updateDatabase' %}" onclick="return confirm('This function should be run when you want to include newly added TTPs from ATT&CK without resetting the Database. Click Ok To Confirm')">Update Database</a>
+        <a title="reset database" href="{% url 'resetDatabase' %}" onclick="return confirm('Are you sure you want to reset database ?')">Reset Database</a>
+</div>
+<!--<footer>Note : Once the colors have been set , if you want to change the color , clicking on table cell</footer>-->
+<script>
+    {% for ttp in ttp %}
+      function {{ ttp.FuncTact }}(){
+            var x = document.getElementById('{{ ttp.FuncTact }}');
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            }
+            else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+          }
+
+      function {{ ttp.FuncTact }}3(){
+            var x = document.getElementById('{{ ttp.FuncTact }}');
+            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+            {% if ttp.FuncTact == "Ini" %}
+                document.getElementById("Ini-5").style.width = "1100px";
+                document.getElementById("Ini-2").style.width = "1100px";
+            {% elif ttp.FuncTact == "Exe" %}
+                document.getElementById("Exe-5").style.width = "700px";
+                document.getElementById("Exe-2").style.width = "700px";
+            {% elif ttp.FuncTact == "Per" %}
+                document.getElementById("Per-5").style.width = "1100px";
+                document.getElementById("Per-2").style.width = "1100px";
+            {% elif ttp.FuncTact == "Pri" %}
+                document.getElementById("Pri-5").style.width = "700px";
+                document.getElementById("Pri-2").style.width = "700px";
+            {% elif ttp.FuncTact == "Def" %}
+                document.getElementById("Def-5").style.width = "1100px";
+                document.getElementById("Def-2").style.width = "1100px";
+            {% elif ttp.FuncTact == "Cre" %}
+                document.getElementById("Cre-5").style.width = "850px";
+                document.getElementById("Cre-2").style.width = "850px";
+            {% elif ttp.FuncTact == "Dis" %}
+                document.getElementById("Dis-5").style.width = "750px";
+                document.getElementById("Dis-2").style.width = "750px";
+            {% elif ttp.FuncTact == "Lat" %}
+                document.getElementById("Lat-5").style.width = "750px";
+                document.getElementById("Lat-2").style.width = "750px";
+            {% elif ttp.FuncTact == "Col" %}
+                document.getElementById("Col-5").style.width = "750px";
+                document.getElementById("Col-2").style.width = "750px";
+            {% elif ttp.FuncTact == "Com" %}
+                document.getElementById("Com-5").style.width = "800px";
+                document.getElementById("Com-2").style.width = "800px";
+            {% elif ttp.FuncTact == "Exf" %}
+                document.getElementById("Exf-5").style.width = "1100px";
+                document.getElementById("Exf-2").style.width = "1100px";
+            {% elif ttp.FuncTact == "Imp" %}
+                document.getElementById("Imp-5").style.width = "700px";
+                document.getElementById("Imp-2").style.width = "700px";
+            {% endif %}
+          }
+
+      function {{ ttp.FuncTact }}4(){
+            var x = document.getElementById('{{ ttp.FuncTact }}');
+            document.body.style.backgroundColor = "white";
+            {% if ttp.FuncTact == "Ini" %}
+                document.getElementById("Ini-5").style.width = "390px";
+                document.getElementById("Ini-2").style.width = "400px";
+            {% elif ttp.FuncTact == "Exe" %}
+                document.getElementById("Exe-5").style.width = "390px";
+                document.getElementById("Exe-2").style.width = "400px";
+            {% elif ttp.FuncTact == "Per" %}
+                document.getElementById("Per-5").style.width = "390px";
+                document.getElementById("Per-2").style.width = "400px";
+            {% elif ttp.FuncTact == "Pri" %}
+                document.getElementById("Pri-5").style.width = "390px";
+                document.getElementById("Pri-2").style.width = "400px";
+            {% elif ttp.FuncTact == "Def" %}
+                document.getElementById("Def-5").style.width = "390px";
+                document.getElementById("Def-2").style.width = "400px";
+            {% elif ttp.FuncTact == "Cre" %}
+                document.getElementById("Cre-5").style.width = "390px";
+                document.getElementById("Cre-2").style.width = "400px";
+            {% elif ttp.FuncTact == "Dis" %}
+                document.getElementById("Dis-5").style.width = "390px";
+                document.getElementById("Dis-2").style.width = "400px";
+            {% elif ttp.FuncTact == "Lat" %}
+                document.getElementById("Lat-5").style.width = "390px";
+                document.getElementById("Lat-2").style.width = "400px";
+            {% elif ttp.FuncTact == "Col" %}
+                document.getElementById("Col-5").style.width = "390px";
+                document.getElementById("Col-2").style.width = "400px";
+            {% elif ttp.FuncTact == "Com" %}
+                document.getElementById("Com-5").style.width = "390px";
+                document.getElementById("Com-2").style.width = "400px";
+            {% elif ttp.FuncTact == "Exf" %}
+                document.getElementById("Exf-5").style.width = "390px";
+                document.getElementById("Exf-2").style.width = "400px";
+            {% elif ttp.FuncTact == "Imp" %}
+                document.getElementById("Imp-5").style.width = "390px";
+                document.getElementById("Imp-2").style.width = "400px";
+            {% endif %}
+          }
+
+    {% endfor %}
+
+    window.onload = function () {
+            var tds = document.getElementsByTagName("td");
+            for (var i = 0; i < tds.length; i++)
+                tds[i].onclick = toggleHighlight;
+        }
+
+    function toggleHighlight() {
+        var td = this;
+        var tclass = td.className;
+        var tName = td.textContent;
+        var ID = td.id;
+        console.log("---------------");
+        console.log(td.id);
+        console.log(tName);
+
+        if( tclass == ''){
+                td.className = 'red';
+                document.getElementById(ID).style.backgroundColor = "Crimson";
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'detvalue' %}",
+                    data: {'tID':ID,'tColor':'Crimson'},
+                    success: function (response) {
+                        //console.log(response)
+                    }
+                })
+            }
+        else if( tclass == 'red'){
+                td.className = 'orange';
+                document.getElementById(ID).style.backgroundColor = "DarkOrange";
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'detvalue' %}",
+                    data: {'tID':ID,'tColor':'DarkOrange'},
+                    success: function (response) {
+                        //console.log(response)
+                    }
+                })
+            }
+        else if( tclass == 'orange'){
+                td.className = 'green';
+                document.getElementById(ID).style.backgroundColor = "lightgreen";
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'detvalue' %}",
+                    data: {'tID':ID,'tColor':'lightgreen'},
+                    success: function (response) {
+                        //console.log(response)
+                    }
+                })
+            }
+        else if( tclass == 'green'){
+                td.className = 'grey';
+                document.getElementById(ID).style.backgroundColor = "lightgrey";
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'detvalue' %}",
+                    data: {'tID':ID,'tColor':'lightgrey'},
+                    success: function (response) {
+                        //console.log(response)
+                    }
+                })
+            }
+        else{
+                td.className = '';
+                document.getElementById(ID).style.backgroundColor = "white";
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'detvalue' %}",
+                    data: {'tID':ID,'tColor':'white'},
+                    success: function (response) {
+                        //console.log(response)
+                    }
+                })
+            }
+        console.log("classname is " + td.className);
+        }
+
+</script>
+</body>
+</html>

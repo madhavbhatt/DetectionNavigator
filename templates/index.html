@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<title>MITRE ATT&CK</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/static/admin/js/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style>
+
+.sidenav {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+  padding-left:20px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+html, body { height: 100% }
+div.scrollmenu {
+  white-space: nowrap;
+  min-height: 100%;
+  padding-left:350px;
+  padding-top: 28px;
+}
+table {
+  font-family: arial, sans-serif;
+  border: 1px solid #A52A2A;
+  border-collapse: separate;
+}
+th {
+
+  text-align: center;
+  padding: 8px;
+  background-color:#ffe9c6;
+    border: 1px solid #A52A2A;
+}
+td {
+  max-width: 195px;
+  text-overflow: ellipsis;
+  overflow:hidden;
+  border: 1px solid #A52A2A;
+}
+.button {
+  background-color: #000000;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight:bold;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 10px 1px;
+  width:400px;
+}
+
+.w3-show-block,.w3-show{
+    display:block!important
+    }
+
+.w3-dropdown-click,.w3-dropdown-hover{
+    position:relative;
+    display:inline-block;
+    cursor:pointer
+    }
+
+.w3-dropdown-content{
+    cursor:auto;
+    color:#000;
+    background-color:#fff;
+    display:none;
+    position:absolute;
+    min-width:160px;
+    margin:0;
+    padding:0;
+    z-index:1
+    }
+
+.red {
+    background-color:Crimson;
+    font-weight: bold;
+}
+
+.orange {
+    background-color:DarkOrange;
+    font-weight: bold;
+}
+
+.green {
+    background-color:lightgreen;
+    font-weight: bold;
+}
+.grey {
+    background-color:lightgrey;
+}
+.expand-small-on-hover:hover {
+  max-width : 200px;
+  text-overflow: ellipsis;
+}
+
+:hover,.red:hover,.orange:hover,.green:hover,.grey:hover,.expand-maximum-on-hover:hover {
+  max-width : initial;
+
+}
+
+</style>
+</head>
+<body>
+{% load static %}
+{% load customtag %}
+<div class="scrollmenu">
+    {% for x in ttp %}
+    {% if x.FuncTact != "Rec" and x.FuncTact != "Res" %}
+    <div id="{{ x.FuncTact }}-1" class="w3-dropdown-click">
+        <button id="{{ x.FuncTact }}-2" onclick="{{ x.FuncTact }}()" class="button">{{ x.Tactic }}</button>
+        <div id="{{ x.FuncTact }}" class="w3-dropdown-content w3-bar-block w3-card-4 w3-animate-zoom">
+            <table onmouseover="{{ x.FuncTact }}3()" onmouseout="{{ x.FuncTact }}4()">
+                <tr><th colspan="2">{{ x.Tactic }}</th></tr>
+                {% for y in tech %}
+                    {% ifequal x.id y.tactic_id %}
+                        {% if y.techniqueRepeat > 1 %}
+                            <tr><td id="{{ y.techniqueId }}" rowspan="{{ y.techniqueRepeat }}" onclick="toggleHighlight()" class="cell expand-maximum-on-hover" style="background-color:{{ y.techColor }}">{{ y.techniqueName }}</td></tr>
+                        {% else %}
+                            <tr><td id="{{ y.techniqueId }}" onclick="toggleHighlight()" class="cell expand-maximum-on-hover" style="background-color:{{ y.techColor }}">{{ y.techniqueName }}</td></tr>
+                        {% endif %}
+                    {% endifequal %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+<div class="sidenav">
+         <h1 style="color: white;">MITRE ATT&CK</h1>
+        <a title="download payload" href="{% url 'downloadToExcel' %}">Download To Excel</a>
+        <a title="reset database" href="{% url 'resetDatabase' %}" onclick="return confirm('Are you sure you want to reset database ?')">Reset Database</a>
+</div>
+<script>
+    {% for ttp in ttp %}
+      function {{ ttp.FuncTact }}(){
+            var x = document.getElementById('{{ ttp.FuncTact }}');
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            }
+            else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+          }
+
+      function {{ ttp.FuncTact }}3(){
+            var x = document.getElementById('{{ ttp.FuncTact }}');
+            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+            {% if ttp.FuncTact == "Ini" %}
+                document.getElementById("Exe-1").style.marginLeft = "100px";
+            {% elif ttp.FuncTact == "Exe" %}
+                document.getElementById("Per-1").style.marginLeft = "100px";
+            {% elif ttp.FuncTact == "Per" %}
+                document.getElementById("Pri-1").style.marginLeft = "100px";
+            {% elif ttp.FuncTact == "Pri" %}
+                document.getElementById("Def-1").style.marginLeft = "100px";
+            {% elif ttp.FuncTact == "Def" %}
+                document.getElementById("Cre-1").style.marginLeft = "100px";
+            {% elif ttp.FuncTact == "Cre" %}
+                document.getElementById("Dis-1").style.marginLeft = "100px";
+            {% elif ttp.FuncTact == "Dis" %}
+                document.getElementById("Lat-1").style.marginLeft = "100px";
+            {% elif ttp.FuncTact == "Lat" %}
+                document.getElementById("Col-1").style.marginLeft = "100px";
+            {% elif ttp.FuncTact == "Col" %}
+                document.getElementById("Com-1").style.marginLeft = "100px";
+            {% elif ttp.FuncTact == "Com" %}
+                document.getElementById("Exf-1").style.marginLeft = "100px";
+            {% elif ttp.FuncTact == "Exf" %}
+                document.getElementById("Imp-1").style.marginLeft = "100px";
+            {% endif %}
+          }
+
+      function {{ ttp.FuncTact }}4(){
+            var x = document.getElementById('{{ ttp.FuncTact }}');
+            document.body.style.backgroundColor = "white";
+            {% if ttp.FuncTact == "Ini" %}
+                document.getElementById("Exe-1").style.marginLeft = "0px";
+            {% elif ttp.FuncTact == "Exe" %}
+                document.getElementById("Per-1").style.marginLeft = "0px";
+            {% elif ttp.FuncTact == "Per" %}
+                document.getElementById("Pri-1").style.marginLeft = "0px";
+            {% elif ttp.FuncTact == "Pri" %}
+                document.getElementById("Def-1").style.marginLeft = "0px";
+            {% elif ttp.FuncTact == "Def" %}
+                document.getElementById("Cre-1").style.marginLeft = "0px";
+            {% elif ttp.FuncTact == "Cre" %}
+                document.getElementById("Dis-1").style.marginLeft = "0px";
+            {% elif ttp.FuncTact == "Dis" %}
+                document.getElementById("Lat-1").style.marginLeft = "0px";
+            {% elif ttp.FuncTact == "Lat" %}
+                document.getElementById("Col-1").style.marginLeft = "0px";
+            {% elif ttp.FuncTact == "Col" %}
+                document.getElementById("Com-1").style.marginLeft = "0px";
+            {% elif ttp.FuncTact == "Com" %}
+                document.getElementById("Exf-1").style.marginLeft = "0px";
+            {% elif ttp.FuncTact == "Exf" %}
+                document.getElementById("Imp-1").style.marginLeft = "0px";
+            {% endif %}
+          }
+
+    {% endfor %}
+
+    window.onload = function () {
+            var tds = document.getElementsByTagName("td");
+            for (var i = 0; i < tds.length; i++)
+                tds[i].onclick = toggleHighlight;
+        }
+
+    function toggleHighlight() {
+        var td = this;
+        var tclass = td.className;
+        var tName = td.textContent;
+        var ID = td.id;
+        console.log("---------------");
+        console.log(td.id);
+        console.log(tName);
+
+        if( tclass == ''){
+                td.className = 'red';
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'detvalue' %}",
+                    data: {'tID':ID,'tColor':'Crimson'},
+                    success: function (response) {
+                        //console.log(response)
+                    }
+                })
+            }
+        else if( tclass == 'red'){
+                td.className = 'orange';
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'detvalue' %}",
+                    data: {'tID':ID,'tColor':'DarkOrange'},
+                    success: function (response) {
+                        //console.log(response)
+                    }
+                })
+            }
+        else if( tclass == 'orange'){
+                td.className = 'green';
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'detvalue' %}",
+                    data: {'tID':ID,'tColor':'lightgreen'},
+                    success: function (response) {
+                        //console.log(response)
+                    }
+                })
+            }
+        else if( tclass == 'green'){
+                td.className = 'grey';
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'detvalue' %}",
+                    data: {'tID':ID,'tColor':'lightgrey'},
+                    success: function (response) {
+                        //console.log(response)
+                    }
+                })
+            }
+        else{
+                td.className = '';
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'detvalue' %}",
+                    data: {'tID':ID,'tColor':'white'},
+                    success: function (response) {
+                        //console.log(response)
+                    }
+                })
+            }
+        console.log("classname is " + td.className);
+        }
+
+</script>
+</body>
+</html>

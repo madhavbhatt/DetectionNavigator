@@ -1,0 +1,120 @@
+apt update
+apt upgrade -y
+apt dist-upgrade -y
+apt autoremove -y
+apt autoclean
+apt clean
+apt install apache2 
+cd /var/www/html/
+mv /home/webshell/Downloads/attnav2-Dec-8-2020/attacknav/ ./
+ls
+cd /etc/apache2/sites-available/
+ls
+mkdir oldfiles 
+mv * oldfiles/
+ls
+vi /etc/apache2/sites-available/desi_command_control.conf
+vi desi_command_control_ssl.conf 
+mv desi_command_control_ssl.conf desi-command-control-ssl.conf
+ls
+clear
+cd /var/www/html/
+ls
+cd attacknav/
+s
+ls
+clear
+apt install python3
+apt install python3-pip
+clear
+pip3 install -r requirements.txt 
+vi requirements.txt 
+nano requirements.txt 
+pip3 install -r requirements.txt 
+apt install vim vi -y
+apt install vim -y
+vi requirements.txt 
+pip3 install -r requirements.txt 
+vi requirements.txt 
+pip3 install -r requirements.txt 
+vi requirements.txt 
+pip3 install -r requirements.txt 
+vi requirements.txt 
+pip3 install -r requirements.txt 
+vi requirements.txt 
+pip3 install -r requirements.txt 
+gedit requirements.txt 
+pip3 install -r requirements.txt 
+vi requirements.txt 
+pip3 install -r requirements.txt 
+vi requirements.txt 
+pip3 install -r requirements.txt 
+vi requirements.txt 
+pip3 install -r requirements.txt 
+vi requirements.txt 
+pip3 install -r requirements.txt 
+gedit requirements.txt 
+pip3 install -r requirements.txt 
+vi requirements.txt 
+pip3 install -r requirements.txt 
+clear
+apt-get install python3-django -y
+apt-get install libapache2-mod-wsgi-py3 -y
+pip3 install django-sslserver
+pip3 install django-mfa
+clear
+ls
+clear
+apt-cache search mysql
+apt-cache search mysql-server
+clear
+apt install mysql-server 
+clear
+mysql -u root -p
+clear
+python3 manage.py makemigrations 
+pip3 install django_mysql
+python3 manage.py makemigrations 
+service mysql status
+clear
+service mysql restart
+python3 manage.py makemigrations 
+apt install mysql-client
+clear
+python3 manage.py makemigrations 
+clear
+mysql -u root -p
+clear
+vi /etc/resolv.conf 
+cd /var/www/html/
+cd attacknav/
+ls
+python3 manage.py runserver 
+pip3 install mysql-python
+pip install mysql-python
+apt-get install python-mysqldb
+apt-get install python3-mysqldb
+python3 manage.py runserver 
+python3 manage.py makemigrations
+pip3 install lxml
+python3 manage.py makemigrations
+pip3 install bs4
+python3 manage.py makemigrations
+pip3 install pandas
+python3 manage.py makemigrations
+pip3 install mysql
+python3 manage.py makemigrations
+pip3  install mysql-connector-python-rf 
+python3 manage.py makemigrations
+pip3 install xlsxwriter
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py runsslserver
+service mysql restart
+python3 manage.py makemigrations
+python3 manage.py migrate
+pip3 install mysql-connector-python
+python3 manage.py runsslserver
+clear
+cat ~/.bash_history 
+exit
