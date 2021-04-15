@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>MITRE ATT&CK</title>
+<title>Detection Navigator</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -163,7 +163,8 @@ td {
     {% endfor %}
 </div>
 <div class="sidenav">
-         <h1 style="color: white;">MITRE ATT&CK</h1>
+        <!--<h1 style="color: white;"><a href="/"> Detection Chart </a></h1>-->
+        <a href="/"><h3 style="color: white;">Detection Chart</h3> </a>
         <a title="download payload" href="{% url 'downloadToExcel' %}">Download To Excel</a>
         <a title="updateDatabase" href="{% url 'updateDatabase' %}" onclick="return confirm('This function should be run when you want to include newly added TTPs from ATT&CK without resetting the Database. Click Ok To Confirm')">Update Database</a>
         <a title="reset database" href="{% url 'resetDatabase' %}" onclick="return confirm('Are you sure you want to reset database ?')">Reset Database</a>

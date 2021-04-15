@@ -3,7 +3,8 @@ import mysql.connector
 import re
 
 def ConvertToExcel():
-    workbook = xlsxwriter.Workbook('/var/www/DetectionNavigator/static/downloads/attackv8.xlsx')
+    #workbook = xlsxwriter.Workbook('/var/www/DetectionNavigator/static/downloads/attackv8.xlsx')
+    workbook = xlsxwriter.Workbook('./static/downloads/attackv8.xlsx')
     worksheet = workbook.add_worksheet('Detections')
     # worksheet2 = workbook.add_worksheet('Attempted TTPs')
     merge_format = workbook.add_format({
