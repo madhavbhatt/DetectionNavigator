@@ -7,3 +7,4 @@ mysql -u "$MYSQL_ROOT" -e "flush privileges"
 python3 /var/www/DetectionNavigator/manage.py makemigrations
 python3 /var/www/DetectionNavigator/manage.py makemigrations DetectionChart
 python3 /var/www/DetectionNavigator/manage.py migrate
+chown -R www-data /var/www/DetectionNavigator

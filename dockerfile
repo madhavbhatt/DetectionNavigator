@@ -18,12 +18,13 @@ ADD ./server.crt /etc/apache2/ssl/server.crt
 ADD ./requirements.txt /var/www/DetectionNavigator
 
 WORKDIR /var/www/DetectionNavigator
-RUN pip3 install -r requirements.txt 
+RUN pip3 install -r requirements.txt
 ADD ./config-db-django.sh /root
 CMD chmod +x /root/config-db-django.sh
 RUN a2enmod ssl
 RUN a2ensite default-ssl.conf
+CMD systemctl start mysql
+CMD /root/config-db-django.sh
 
-EXPOSE 80 443 
+EXPOSE 80 443
 CMD ["apache2ctl", "-D", "FOREGROUND"]
-
