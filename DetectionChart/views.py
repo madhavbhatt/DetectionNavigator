@@ -1,5 +1,3 @@
-# Create your views here.
-# Note: The stuff above this will already be in this file.
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse,Http404, HttpResponseRedirect
 from attnav import *
@@ -8,14 +6,9 @@ from manageDB import *
 from download import *
 from update import *
 import mysql.connector
-# from attnavmysql import *
-# from manageDBmysql import *
 
 
 def index(request):
-    # flushDB()
-    # dataPullMITRE()
-    # updateRepeats()
     db_connection = mysql.connector.connect(host="localhost", user="django", passwd="django-user-password",database="detectionnav")
     db_cursor = db_connection.cursor()
     db_cursor.execute('select * from DetectionChart_techniques')
@@ -75,9 +68,3 @@ def resetDatabase(request):
     dataPullMITRE()
     attnavupdateRepeats()
     return HttpResponseRedirect('/')
-
-
-'''
-setInterval(function(){$('#scrollmenu').load({% url 'index' %})},1000);
-
-'''

@@ -70,13 +70,10 @@ def dataPullMITRE():
             else:
                 ndf.append(str(subid))
                 j = 0
-        print("-" * 120)
-        # print(title)
+
         tacticsTechniquesDict[title] = []
-        print("-" * 120)
         for k in range(0, l):
             Tech = str(ndf[k]) + " : " + str(df['Name'][k])
-            # print(Tech)
             tacticsTechniquesDict[title].append(Tech)
             T.Technique.append(str(Tech))
             if Tech in techniquesList:
@@ -119,33 +116,3 @@ def attnavupdateRepeats():
     for key, value in a.items():
         db_cursor.execute('update DetectionChart_techniques set techniqueRepeat=' + str(value) + ' WHERE techniqueId="' + key + '";')
         db_connection.commit()
-
-"""
-    html = 
-        <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-        	"http://www.w3.org/TR/html4/strict.dtd">
-        <html lang="en" dir="ltr">
-        	<head>
-        		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        		<meta http-equiv="Content-Script-Type" content="text/javascript; charset=utf-8">
-        		<title>Conforming HTML 4.01 Strict Template</title>
-        	</head>
-
-        	<body><font size="2" face="Arial" >
-
-
-    for TA in tacticsTechniquesDict.keys():
-        html += <table class="fixed" style="display: inline-block; border: 1px solid; float: left; " border = '1'><col width="10px" />
-        html += "<tr><th>{}</th>".format(TA)
-        html += "</tr>"
-        l = len(tacticsTechniquesDict[TA])
-        for i in range(0, l):
-            html += "<tr><td>{}</td>".format(tacticsTechniquesDict[TA][i])
-            html += "</tr>"
-        html += "</table>"
-
-    html += "</body></html>"
-    f = open('/tmp/c.html', 'w')
-    f.write(html)
-    f.close()
-"""

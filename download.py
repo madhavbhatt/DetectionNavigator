@@ -3,10 +3,8 @@ import mysql.connector
 import re
 
 def ConvertToExcel():
-    #workbook = xlsxwriter.Workbook('/var/www/DetectionNavigator/static/downloads/attackv8.xlsx')
     workbook = xlsxwriter.Workbook('./static/downloads/attackv8.xlsx')
     worksheet = workbook.add_worksheet('Detections')
-    # worksheet2 = workbook.add_worksheet('Attempted TTPs')
     merge_format = workbook.add_format({
         'bold': 1,
         'border': 1,
@@ -15,8 +13,6 @@ def ConvertToExcel():
         'font_size': '12',
         'fg_color': '#FFF8DC'})
 
-    # Formatting based on detection scorecard present
-    # 0 = don't detect, 1 = detect, but not variations, 2 = detect this TTP and variations, 3 = N/A not tested
     cell_format_score_0 = workbook.add_format({'bold': True, 'font_color': 'black', 'bg_color': '#DC143C', 'border': 1})
     cell_format_score_1 = workbook.add_format({'bold': True, 'font_color': 'black', 'bg_color': '#FF8C00', 'border': 1})
     cell_format_score_2 = workbook.add_format({'bold': True, 'font_color': 'black', 'bg_color': '#90EE90', 'border': 1})

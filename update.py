@@ -69,26 +69,12 @@ def dataUpdateMITRE():
             else:
                 ndf.append(str(subid))
                 j = 0
-        print("-" * 120)
-        # print(title)
-        tacticsTechniquesDict[title] = []
-        print("-" * 120)
 
-        print(title)
+        tacticsTechniquesDict[title] = []
         db_cursor.execute("SELECT * FROM DetectionChart_ttp WHERE Tactic='" + title + "'")
         tacresult = db_cursor.fetchall()
-        print(tacresult)
-        '''
-        tacresult = TTP.objects.filter(Tactic=title)
-        for a in tacresult:
-            x = a.id
-            print(x)
-        '''
-
-        print(tacresult)
 
         if tacresult:
-            print("TACTIC FOUND")
             for k in range(0, l):
                 Tech = str(ndf[k]) + " : " + str(df['Name'][k])
                 tacticsTechniquesDict[title].append(Tech)
@@ -96,9 +82,7 @@ def dataUpdateMITRE():
                     "SELECT * FROM DetectionChart_techniques WHERE techniqueName='" + str(Tech) + "' AND tactic_id=" + str(
                         tacresult[0][0]))
                 techresult = db_cursor.fetchall()
-                print(title)
                 if not techresult:
-                    print("Technique not Found")
                     T = TTP.objects.all().filter(Tactic=title)
                     T1 = Tactic.objects.filter(tacticName=title)
 
@@ -136,20 +120,16 @@ def dataUpdateMITRE():
                         techniquesList.append(Tech)
 
                     T.update(TotalTech=len(tacticsTechniquesDict[title]))
-
         else:
-            print("TACTIC NOT FOUND")
             T = TTP.objects.create(Tactic="", Technique=[])
             T1 = Tactic.objects.create(tacticName="")
             T.Tactic = title
             T.FuncTact = title[:3]
             T1.tacticName = title
             T1.save()
-            print(title)
 
             for k in range(0, l):
                 Tech = str(ndf[k]) + " : " + str(df['Name'][k])
-                # print(Tech)
                 tacticsTechniquesDict[title].append(Tech)
                 T.Technique.append(str(Tech))
                 if Tech in techniquesList:
