@@ -18,7 +18,7 @@ def index(request):
     # updateRepeats()
     db_connection = mysql.connector.connect(host="localhost", user="django", passwd="django-user-password",database="detectionnav")
     db_cursor = db_connection.cursor()
-    db_cursor.execute('select * from mitrenv_techniques')
+    db_cursor.execute('select * from DetectionChart_techniques')
     techrow = db_cursor.fetchall()
 
     if not techrow:
@@ -53,7 +53,7 @@ def detvalue(request):
 
     db_connection = mysql.connector.connect(host="localhost", user="django", passwd="django-user-password",database="detectionnav")
     db_cursor = db_connection.cursor()
-    db_cursor.execute("UPDATE mitrenv_techniques SET techColor='" + tColor + "' WHERE techniqueId = '"+ tID +"'")
+    db_cursor.execute("UPDATE DetectionChart_techniques SET techColor='" + tColor + "' WHERE techniqueId = '"+ tID +"'")
     db_connection.commit()
 
     all_dict = {'ttp': ttp , 'tac':tac, 'tech':tech }

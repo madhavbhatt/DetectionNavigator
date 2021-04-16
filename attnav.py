@@ -3,7 +3,7 @@ import re
 from lxml import html
 from bs4 import BeautifulSoup
 import pandas as pd
-from mitrenv.models import *
+from DetectionChart.models import *
 from collections import Counter
 import mysql.connector
 
@@ -117,7 +117,7 @@ def attnavupdateRepeats():
     db_cursor = db_connection.cursor()
 
     for key, value in a.items():
-        db_cursor.execute('update mitrenv_techniques set techniqueRepeat=' + str(value) + ' WHERE techniqueId="' + key + '";')
+        db_cursor.execute('update DetectionChart_techniques set techniqueRepeat=' + str(value) + ' WHERE techniqueId="' + key + '";')
         db_connection.commit()
 
 """

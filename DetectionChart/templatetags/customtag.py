@@ -11,7 +11,7 @@ def updateColor(value,arg):
     print("color name :" + str(color))
     db_connection = mysql.connector.connect(host="localhost", user="django", passwd="django-user-password", database="detectionnav")
     db_cursor = db_connection.cursor()
-    db_cursor.execute("UPDATE mitrenv_techniques SET techColor='"+ color +"' WHERE techniqueName = 'T1529 : System Shutdown/Reboot'")
+    db_cursor.execute("UPDATE DetectionChart_techniques SET techColor='"+ color +"' WHERE techniqueName = 'T1529 : System Shutdown/Reboot'")
     db_connection.commit()
     return techname
 

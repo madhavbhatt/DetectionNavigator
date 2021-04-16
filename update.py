@@ -3,7 +3,7 @@ import re
 from lxml import html
 from bs4 import BeautifulSoup
 import pandas as pd
-from mitrenv.models import *
+from DetectionChart.models import *
 from collections import Counter
 import mysql.connector
 
@@ -75,7 +75,7 @@ def dataUpdateMITRE():
         print("-" * 120)
 
         print(title)
-        db_cursor.execute("SELECT * FROM mitrenv_ttp WHERE Tactic='" + title + "'")
+        db_cursor.execute("SELECT * FROM DetectionChart_ttp WHERE Tactic='" + title + "'")
         tacresult = db_cursor.fetchall()
         print(tacresult)
         '''
@@ -93,7 +93,7 @@ def dataUpdateMITRE():
                 Tech = str(ndf[k]) + " : " + str(df['Name'][k])
                 tacticsTechniquesDict[title].append(Tech)
                 db_cursor.execute(
-                    "SELECT * FROM mitrenv_techniques WHERE techniqueName='" + str(Tech) + "' AND tactic_id=" + str(
+                    "SELECT * FROM DetectionChart_techniques WHERE techniqueName='" + str(Tech) + "' AND tactic_id=" + str(
                         tacresult[0][0]))
                 techresult = db_cursor.fetchall()
                 print(title)
@@ -193,5 +193,5 @@ def updateRepeats():
 
     for key, value in a.items():
         db_cursor.execute(
-            'update mitrenv_techniques set techniqueRepeat=' + str(value) + ' WHERE techniqueId="' + key + '";')
+            'update DetectionChart_techniques set techniqueRepeat=' + str(value) + ' WHERE techniqueId="' + key + '";')
         db_connection.commit()

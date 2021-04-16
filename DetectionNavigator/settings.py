@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'mitrenv',
+    'DetectionChart',
     'sslserver',
     'django.contrib.admin',
     'django.contrib.auth',

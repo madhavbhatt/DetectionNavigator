@@ -24,13 +24,13 @@ cell_format_score_3 = workbook.add_format({'bold': True, 'font_color': 'black', 
 db_connection = mysql.connector.connect(host="localhost", user="django", passwd="django-user-password", database="detectionnav")
 db_cursor = db_connection.cursor()
 
-db_cursor.execute('SELECT * FROM mitrenv_ttp')
+db_cursor.execute('SELECT * FROM DetectionChart_ttp')
 ttprow = db_cursor.fetchall()
 
-db_cursor.execute('SELECT * FROM mitrenv_tactic')
+db_cursor.execute('SELECT * FROM DetectionChart_tactic')
 tacrow = db_cursor.fetchall()
 
-db_cursor.execute('SELECT * FROM mitrenv_techniques')
+db_cursor.execute('SELECT * FROM DetectionChart_techniques')
 techrow = db_cursor.fetchall()
 
 lenttprow = len(ttprow)
