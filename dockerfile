@@ -23,8 +23,7 @@ ADD ./config-db-django.sh /root
 CMD chmod +x /root/config-db-django.sh
 RUN a2enmod ssl
 RUN a2ensite default-ssl.conf
-CMD systemctl start mysql
-CMD /root/config-db-django.sh
+RUN /bin/bash -c /root/config-db-django.sh
 
 EXPOSE 80 443 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
