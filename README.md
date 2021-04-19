@@ -4,10 +4,11 @@ Disclaimer : THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
 
 This tool quickly helps build detection chart ( a.k.a. detection heatmap ).
 
-You can use docker installation option OR import the ova file. 
+You can use docker installation option OR import the ova file. You can find more information here in this article : 
 
 Credentials for Detection Navigator VM 
 username : detectionnav
 password : detectionnavpassword1!
 
-It works with VirtualBox. It may give error for USB 2.0 controller. You can just turn it off from settings if it does.
+It works with VirtualBox. It may give error for USB 2.0 controller. You can just switch from USB 2.0 to USB 1.0/1.1 in the settings for VM.
+
