@@ -18,7 +18,7 @@ $ docker-compose up -d
 
 $ docker exec -it <containerID> /root/config-db-django.sh
 
-**VIRTUAL MACHINE SETUP  **
+**VIRTUAL MACHINE SETUP**
 
 Credentials for Detection Navigator VM
 
