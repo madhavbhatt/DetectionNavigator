@@ -29,5 +29,5 @@ a2enmod ssl
 a2ensite default-ssl.conf
 systemctl restart apache2
 
-echo "Please run manually run config-db-django.sh if you get a mysql error"
+echo "Please manually run config-db-django.sh if you get a mysql error"
 
