@@ -1,3 +1,5 @@
+# If you decide to not use docker OR ova file option , you can use this script. It has been tested on ubuntu 20.04 image.
+
 #!/bin/bash
 
 apt-get update
@@ -18,12 +20,14 @@ cp default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 cp server.key /etc/apache2/ssl/server.key
 cp server.crt /etc/apache2/ssl/server.crt
 
-chmod +x /root/config-db-django.sh # configure mysql database for Django
+chmod +x config-db-django.sh # configure mysql database for Django
 chown -R www-data /var/www/DetectionNavigator # allows downloading detection chart to excel
-sh /root/config-db-django.sh
+
+sh config-db-django.sh
 
 a2enmod ssl
 a2ensite default-ssl.conf
 systemctl restart apache2
 
+echo "Please run manually run config-db-django.sh if you get a mysql error"
 
