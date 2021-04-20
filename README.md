@@ -6,15 +6,19 @@ This tool quickly helps build detection chart ( a.k.a. detection heatmap ).
 
 You can use docker installation option OR import the ova file. You can find more information here in this article : https://desi-jarvis.medium.com/detection-navigator-a97ffd4fbeff
 
-DOCKER SETUP : 
+**DOCKER SETUP**
 
 $ wget https://github.com/madhavbhatt/DetectionNavigator/raw/master/detectionnavigator-docker.zip
+
 $ unzip detectionnavigator-docker.zip
+
 $ cd dockerdetectionnavigator
+
 $ docker-compose up -d
+
 $ docker exec -it <containerID> /root/config-db-django.sh
 
-Virtual Machine Setup 
+**VIRTUAL MACHINE SETUP  **
 
 Credentials for Detection Navigator VM
 
