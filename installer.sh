@@ -10,6 +10,8 @@ apt-get install python3-mysqldb -y
 apt-get install mysql-server -y
 apt-get install mysql-client -y
 apt-get install net-tools -y
+apt-get install systemctl -y
+
 pip3 install -r requirements.txt
 
 mkdir /var/www/DetectionNavigator
