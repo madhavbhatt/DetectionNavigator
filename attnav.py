@@ -29,14 +29,16 @@ def dataPullMITRE():
     basehref = soupBaseURI.xpath('//a/@href')
 
     rBase = re.compile("/tactics/TA\d+")
-    tacList = list(filter(rBase.match, basehref))
+    #tacList = list(filter(rBase.match, basehref))
+    tacList = list(filter(rBase.search, basehref))
 
     for z in tacList:
         if z not in tacticsList:
             tacticsList.append(z)
 
     for tacturi in tacticsList:
-        tacticshref.append(str(baseURI) + str(tacturi))
+        #tacticshref.append(str(baseURI) + str(tacturi))
+        tacticshref.append(str(tacturi))
 
     for tacturi in tacticshref:
         tacticsID.append(tacturi.split("/")[-1])

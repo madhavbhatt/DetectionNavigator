@@ -58,8 +58,8 @@ def downloadToExcel(request):
 
 def updateDatabase(request):
     print("updating database")
-    dataUpdateMITRE()
-    updateRepeats()
+    updateMITRE()
+    updateMITRERepeats()
     return HttpResponseRedirect('/')
 
 def resetDatabase(request):
