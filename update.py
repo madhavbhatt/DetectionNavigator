@@ -6,11 +6,13 @@ import pandas as pd
 from collections import Counter
 import mysql.connector
 from DetectionChart.models import *
+from backupdb import *
 
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36'}
 
 def updateMITRE():
     global techniquesList
+    backupDataBase()
     db_connection = mysql.connector.connect(host="localhost", user="django", passwd="django-user-password",database="detectionnav")
     db_cursor = db_connection.cursor()
     db_cursor.execute("CREATE TABLE BackUp_DetectionChart_ttp SELECT * FROM DetectionChart_ttp")
