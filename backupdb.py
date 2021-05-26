@@ -10,9 +10,17 @@ To restore this database use following command. Date and time stamp will give yo
 
 def backupDataBase():
     now = datetime.datetime.now()
-    filename = '/var/www/DetectionNavigator/BackupDBs/backup-alldatabases-' + now.strftime('%Y-%m-%d--%H:%M:%S') + '.sql'
+    filename = '/var/www/DetectionNavigator/BackupDBs/automatic-backup-alldatabases-' + now.strftime('%Y-%m-%d--%H:%M:%S') + '.sql'
     if not os.path.exists('/var/www/DetectionNavigator/BackupDBs'):
         os.makedirs('/var/www/DetectionNavigator/BackupDBs')
         os.popen('chown -R www-data /var/www/DetectionNavigator/BackupDBs')
     os.popen('mysqldump -u django -pdjango-user-password --all-databases > ' + filename).read()
 
+
+def manualBackupDatabase():
+    now = datetime.datetime.now()
+    filename = '/var/www/DetectionNavigator/BackupDBs/manual-backup-alldatabases-' + now.strftime('%Y-%m-%d--%H:%M:%S') + '.sql'
+    if not os.path.exists('/var/www/DetectionNavigator/BackupDBs'):
+        os.makedirs('/var/www/DetectionNavigator/BackupDBs')
+        os.popen('chown -R www-data /var/www/DetectionNavigator/BackupDBs')
+    os.popen('mysqldump -u django -pdjango-user-password --all-databases > ' + filename).read()

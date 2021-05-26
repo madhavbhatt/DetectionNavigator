@@ -17,6 +17,20 @@ div.scrollmenu {
   padding-left:350px;
   padding-top: 28px;
 }
+body {
+          position: relative;
+          margin: 0;
+          font-family: 'Work Sans', Arial, Helvetica, sans-serif;
+          min-height: 100%;
+          background: repeating-linear-gradient(
+              -45deg,
+              rgba( 0,0,0,0.125 ), transparent, rgba( 0,0,0,0.125 ) 25%
+            ) bottom right/200% 200%
+             #708090;
+          animation: diagonal_move 6s linear infinite;
+          color: #777;
+        }
+
 table {
   font-family: arial, sans-serif;
   border: 1px solid #A52A2A;
@@ -48,6 +62,20 @@ td {
   cursor: pointer;
   padding: 10px 1px;
   width:400px;
+}
+
+.linkbutton {
+  background-color: #708090;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 11px;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 10px 1px;
+  width:250px;
 }
 
 .w3-show-block,.w3-show{
@@ -115,12 +143,12 @@ td {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
+  color: #FFFFFF;
   display: block;
 }
 
 .sidenav a:hover {
-  color: #f1f1f1;
+  color: #000000;
 }
 
 .main {
@@ -136,12 +164,12 @@ td {
 
 </style>
 </head>
+
 <body>
 {% load static %}
 {% load customtag %}
 <div class="scrollmenu">
     {% for x in ttp %}
-    {% if x.FuncTact != "Rec" and x.FuncTact != "Res" %}
     <div id="{{ x.FuncTact }}-1" class="w3-dropdown-click">
         <button id="{{ x.FuncTact }}-2" onclick="{{ x.FuncTact }}()" class="button">{{ x.Tactic }}</button>
         <div id="{{ x.FuncTact }}" class="w3-dropdown-content w3-bar-block w3-card-4 w3-animate-zoom">
@@ -159,15 +187,20 @@ td {
             </table>
         </div>
     </div>
-    {% endif %}
     {% endfor %}
 </div>
 <div class="sidenav">
         <!--<h1 style="color: white;"><a href="/"> Detection Chart </a></h1>-->
         <a href="/"><h3 style="color: white;">Detection Chart</h3> </a>
-        <a title="download payload" href="{% url 'downloadToExcel' %}">Download To Excel</a>
-        <a title="updateDatabase" href="{% url 'updateDatabase' %}" onclick="return confirm('This function should be run when you want to include newly added TTPs from ATT&CK without resetting the Database. Click Ok To Confirm')">Update Database</a>
-        <a title="reset database" href="{% url 'resetDatabase' %}" onclick="return confirm('Are you sure you want to reset database ?')">Reset Database</a>
+        <a title="Download To Excel" href="{% url 'downloadToExcel' %}" class="linkbutton">Download</a>
+        <a title="Backup Database" href="{% url 'backupDatabase' %}" class="linkbutton">Backup Database</a>
+        <a title="Update Database" href="{% url 'updateDatabase' %}" onclick="return confirm('This function should be run when you want to include newly added TTPs from ATT&CK without resetting the Database. Click Ok To Confirm')" class="linkbutton">Update Database</a>
+        <a title="Reset Database" href="{% url 'resetDatabase' %}" onclick="return confirm('Are you sure you want to reset database ?')" class="linkbutton">Reset Database</a>
+        <a title="Logout" href="{% url 'logout' %}" style="position: absolute;bottom: 0;margin-bottom:20%" class="linkbutton">Logout</a>
+        <!--<a title="Download To Excel" href="{% url 'downloadToExcel' %}">Download To Excel</a>
+        <a title="Update Database" href="{% url 'updateDatabase' %}" onclick="return confirm('This function should be run when you want to include newly added TTPs from ATT&CK without resetting the Database. Click Ok To Confirm')">Update Database</a>
+        <a title="Reset Database" href="{% url 'resetDatabase' %}" onclick="return confirm('Are you sure you want to reset database ?')">Reset Database</a>
+        <a title="Logout" href="{% url 'logout' %}" style="position: absolute;bottom: 0;margin-bottom:20%">Logout</a>-->
 </div>
 <!--<footer>Note : Once the colors have been set , if you want to change the color , clicking on table cell</footer>-->
 <script>
@@ -184,8 +217,14 @@ td {
 
       function {{ ttp.FuncTact }}3(){
             var x = document.getElementById('{{ ttp.FuncTact }}');
-            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-            {% if ttp.FuncTact == "Ini" %}
+            /*document.body.style.backgroundColor = "rgba(0,0,0,0.4)";*/
+            {% if ttp.FuncTact == "Rec" %}
+                document.getElementById("Rec-5").style.width = "700px";
+                document.getElementById("Rec-2").style.width = "700px";
+            {% elif ttp.FuncTact == "Res" %}
+                document.getElementById("Res-5").style.width = "700px";
+                document.getElementById("Res-2").style.width = "700px";
+            {% elif ttp.FuncTact == "Ini" %}
                 document.getElementById("Ini-5").style.width = "1100px";
                 document.getElementById("Ini-2").style.width = "1100px";
             {% elif ttp.FuncTact == "Exe" %}
@@ -226,8 +265,14 @@ td {
 
       function {{ ttp.FuncTact }}4(){
             var x = document.getElementById('{{ ttp.FuncTact }}');
-            document.body.style.backgroundColor = "white";
-            {% if ttp.FuncTact == "Ini" %}
+            /*document.body.style.backgroundColor = "white";*/
+             {% if ttp.FuncTact == "Rec" %}
+                document.getElementById("Rec-5").style.width = "390px";
+                document.getElementById("Rec-2").style.width = "400px";
+            {% elif ttp.FuncTact == "Res" %}
+                document.getElementById("Res-5").style.width = "390px";
+                document.getElementById("Res-2").style.width = "400px";
+            {% elif ttp.FuncTact == "Ini" %}
                 document.getElementById("Ini-5").style.width = "390px";
                 document.getElementById("Ini-2").style.width = "400px";
             {% elif ttp.FuncTact == "Exe" %}
