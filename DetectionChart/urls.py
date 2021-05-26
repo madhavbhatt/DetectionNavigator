@@ -6,7 +6,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     url(r'^detvalue$', views.detvalue , name='detvalue'),
     path('downloadToExcel', views.downloadToExcel, name='downloadToExcel'),
+    path('backupDatabase', views.backupDatabase, name='backupDatabase'),
     path('resetDatabase', views.resetDatabase, name='resetDatabase'),
     path('updateDatabase', views.updateDatabase, name='updateDatabase'),
-    path('logoutView',views.logoutView,name="logoutView"),
+    # path('logoutView',views.logoutView,name="logoutView"),
 ]
