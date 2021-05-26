@@ -2,6 +2,10 @@
 
 This tool quickly helps build detection chart ( a.k.a. detection heatmap ).
 
+Version 2.0 coming soon 
+
+![DetectionNavigatorv2.0.png](DetectionNavigatorv2.0.png)
+
 You can use docker installation option OR import the ova file. You can find more information here in this article : https://desi-jarvis.medium.com/detection-navigator-a97ffd4fbeff
 
 **DOCKER SETUP**
