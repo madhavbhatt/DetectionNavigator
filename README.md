@@ -8,6 +8,13 @@ Version 2.0 coming soon
 
 You can use docker installation option OR import the ova file. You can find more information here in this article : https://desi-jarvis.medium.com/detection-navigator-a97ffd4fbeff
 
+**Web UI Credentials**
+
+username : detectionchartadmin
+password : detectionchartpassword1
+
+You can change this form Django admin portal https://<IP:PORT>>/admin. 
+
 **DOCKER SETUP**
 
 $ wget https://github.com/madhavbhatt/DetectionNavigator/raw/master/detectionnavigator-docker.zip
