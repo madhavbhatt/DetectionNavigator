@@ -11,9 +11,10 @@ You can use docker installation option OR import the ova file. You can find more
 **Web UI Credentials**
 
 username : detectionchartadmin
+
 password : detectionchartpassword1
 
-You can change this form Django admin portal https://<IP:PORT>>/admin. 
+You can change this form Django admin portal **https://IP:PORT/admin** 
 
 **DOCKER SETUP**
 
