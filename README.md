@@ -2,11 +2,9 @@
 
 This tool quickly helps build detection chart ( a.k.a. detection heatmap ).
 
-Version 2.0 - Beta : https://github.com/madhavbhatt/DetectionNavigator/releases
+More information can be found in this article : https://desi-jarvis.medium.com/detection-navigator-a97ffd4fbeff
 
-![DetectionNavigatorv2.0.png](DetectionNavigatorv2.0.png)
-
-You can use docker installation option OR import the ova file. You can find more information here in this article : https://desi-jarvis.medium.com/detection-navigator-a97ffd4fbeff
+#Version 2.0 - Beta 
 
 **Web UI Credentials**
 
@@ -14,32 +12,32 @@ username : detectionchartadmin
 
 password : detectionchartpassword1
 
-You can change this form Django admin portal **https://IP:PORT/admin** 
+You can change this form Django admin portal **https://IP:PORT/admin**
 
-**DOCKER SETUP**
+**SETUP**
 
-$ wget https://github.com/madhavbhatt/DetectionNavigator/raw/master/detectionnavigator-docker.zip
+Requires you to manually start apache and mysql when you start the container. 
 
-$ unzip detectionnavigator-docker.zip
+$ docker pull desijarvis/detectionnavigator:v2.0
 
-$ cd dockerdetectionnavigator
+$ docker run -p 8443:443 -it desijarvis/detectionnavigator:v2.0          
 
-$ docker-compose up -d
+root@containerID # service apache2 start                                
 
-$ docker exec -it <containerID> /root/config-db-django.sh
+root@containerID # service mysql start
 
-**VIRTUAL MACHINE SETUP**
+root@containerID # netstat -antp                                        ( Make sure both apache and mysql are running )
 
-Credentials for Detection Navigator VM
+#Version 1.2  
 
-username : detectionnav
+Requires you to manually start apache and mysql when you start the container. 
 
-password : detectionnavpassword1!
+$ docker pull desijarvis/detectionnavigator:v1.2
 
+$ docker run -p 8443:443 -it desijarvis/detectionnavigator:v1.2          
 
-It works with VirtualBox. You may have to change some of the settings for the VM.
+root@containerID # service apache2 start
 
-For example , if you get a network interface error , that might be because your network interface is named differently. Change the network settings to your preference. Change USB setting from USB 2.0 to USB 1.1/1.0 if you see a USB 2.0 error.
+root@containerID # service mysql start
 
-
- 
+root@containerID # netstat -antp                                        ( Make sure both apache and mysql are running )
