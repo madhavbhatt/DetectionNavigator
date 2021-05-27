@@ -2,7 +2,7 @@
 
 This tool quickly helps build detection chart ( a.k.a. detection heatmap ).
 
-Version 2.0 - Beta 
+Version 2.0 - Beta : https://github.com/madhavbhatt/DetectionNavigator/releases
 
 ![DetectionNavigatorv2.0.png](DetectionNavigatorv2.0.png)
 
