@@ -9,5 +9,6 @@ urlpatterns = [
     path('backupDatabase', views.backupDatabase, name='backupDatabase'),
     path('resetDatabase', views.resetDatabase, name='resetDatabase'),
     path('updateDatabase', views.updateDatabase, name='updateDatabase'),
+    path('downloadAtomicTests', views.downloadAtomicTests, name='downloadAtomicTests'),
     # path('logoutView',views.logoutView,name="logoutView"),
 ]
