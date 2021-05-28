@@ -87,6 +87,12 @@ def resetDatabase(request):
     attnavupdateRepeats()
     return HttpResponseRedirect('/')
 
+
+@login_required(login_url='/login/')
+def downloadAtomicTests(request):
+    return HttpResponseRedirect('static/atomictests/osx/osx-atomic-tests.tar.gz')
+
+
 @xframe_options_deny
 @never_cache
 def logoutView(request):
