@@ -2,5 +2,3 @@ venv/*
 extra/*
 .idea/*
 .gitignore
-static/atomictests/osx/T1553_001.zip
-static/atomictests/osx/T1569_001.zip
