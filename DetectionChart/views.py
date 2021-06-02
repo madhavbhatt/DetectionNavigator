@@ -95,7 +95,7 @@ def downloadOSXAtomicTests(request):
 
 @login_required(login_url='/login/')
 def downloadLinuxAtomicTests(request):
-    return HttpResponseRedirect('static/atomictests/linux/atomic_red_team_automated_test.py')
+    return HttpResponseRedirect('static/atomictests/linux/LINUX-atomic_red_team_automated_test.py')
 
 
 @xframe_options_deny
