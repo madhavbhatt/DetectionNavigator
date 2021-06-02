@@ -196,7 +196,8 @@ td {
         <a title="Backup Database" href="{% url 'backupDatabase' %}" class="linkbutton">Backup Database</a>
         <a title="Update Database" href="{% url 'updateDatabase' %}" onclick="return confirm('This function should be run when you want to include newly added TTPs from ATT&CK without resetting the Database. Click Ok To Confirm')" class="linkbutton">Update Database</a>
         <a title="Reset Database" href="{% url 'resetDatabase' %}" onclick="return confirm('Are you sure you want to reset database ?')" class="linkbutton">Reset Database</a>
-        <a title="Download Atomic Tests" href="{% url 'downloadAtomicTests' %}" class="linkbutton">OSX Atomic Tests</a>
+        <a title="Download OSX Atomic Tests" href="{% url 'downloadOSXAtomicTests' %}" class="linkbutton">OSX Atomic Tests</a>
+        <a title="Download Linux Atomic Tests" href="{% url 'downloadLinuxAtomicTests' %}" class="linkbutton">Linux Atomic Tests</a>
         <a title="Logout" href="{% url 'logout' %}" style="position: absolute;bottom: 0;margin-bottom:20%" class="linkbutton">Logout</a>
         <!--<a title="Download To Excel" href="{% url 'downloadToExcel' %}">Download To Excel</a>
         <a title="Update Database" href="{% url 'updateDatabase' %}" onclick="return confirm('This function should be run when you want to include newly added TTPs from ATT&CK without resetting the Database. Click Ok To Confirm')">Update Database</a>

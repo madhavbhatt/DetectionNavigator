@@ -89,8 +89,13 @@ def resetDatabase(request):
 
 
 @login_required(login_url='/login/')
-def downloadAtomicTests(request):
+def downloadOSXAtomicTests(request):
     return HttpResponseRedirect('static/atomictests/osx/osx-atomic-tests.tar.gz')
+
+
+@login_required(login_url='/login/')
+def downloadLinuxAtomicTests(request):
+    return HttpResponseRedirect('static/atomictests/linux/atomic_red_team_automated_test.py')
 
 
 @xframe_options_deny
