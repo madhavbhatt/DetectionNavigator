@@ -4,7 +4,7 @@ This tool quickly helps build detection chart ( a.k.a. detection heatmap ).
 
 More information can be found in this article : https://desi-jarvis.medium.com/detection-navigator-a97ffd4fbeff
 
-# Version 2.0 - Beta 
+# Version 2.2 
 
 **Web UI Credentials**
 
@@ -18,9 +18,9 @@ You can change this form Django admin portal **https://IP:PORT/admin**
 
 Requires you to manually start apache and mysql when you start the container. 
 
-$ docker pull desijarvis/detectionnavigator:v2.0
+$ docker pull desijarvis/detectionnavigator:v2.2
 
-$ docker run -p 8443:443 -it desijarvis/detectionnavigator:v2.0          
+$ docker run -p 8443:443 -it desijarvis/detectionnavigator:v2.2          
 
 root@containerID # service apache2 start                                
 
