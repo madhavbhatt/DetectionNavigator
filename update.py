@@ -3,6 +3,7 @@ import re
 from lxml import html
 from bs4 import BeautifulSoup
 import pandas as pd
+import validators
 from collections import Counter
 import mysql.connector
 from DetectionChart.models import *
@@ -15,6 +16,12 @@ def updateMITRE():
     backupDataBase()
     db_connection = mysql.connector.connect(host="localhost", user="django", passwd="django-user-password",database="detectionnav")
     db_cursor = db_connection.cursor()
+    try:
+        db_cursor.execute("DROP TABLE BackUp_DetectionChart_ttp")
+        db_cursor.execute("DROP TABLE BackUp_DetectionChart_ttp")
+        db_cursor.execute("DROP TABLE BackUp_DetectionChart_ttp")
+    except:
+        pass
     db_cursor.execute("CREATE TABLE BackUp_DetectionChart_ttp SELECT * FROM DetectionChart_ttp")
     db_cursor.execute("CREATE TABLE BackUp_DetectionChart_tactic SELECT * FROM DetectionChart_tactic")
     db_cursor.execute("CREATE TABLE BackUp_DetectionChart_techniques SELECT * FROM DetectionChart_techniques")
@@ -40,7 +47,11 @@ def updateMITRE():
         if z not in tacticsList:
             tacticsList.append(z)
     for tacturi in tacticsList:
-        tacticshref.append(str(tacturi))
+        if not validators.url(tacturi):
+            tacticshref.append(str(baseURI) + str(tacturi))
+        else:
+            tacticshref.append(str(tacturi))
+
     for tacturi in tacticshref:
         tacticsID.append(tacturi.split("/")[-1])
     l = len(tacticshref)

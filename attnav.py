@@ -3,11 +3,14 @@ import re
 from lxml import html
 from bs4 import BeautifulSoup
 import pandas as pd
+import validators
 from DetectionChart.models import *
 from collections import Counter
 import mysql.connector
 
+
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36'}
+
 
 def dataPullMITRE():
     global techniquesList
@@ -37,8 +40,10 @@ def dataPullMITRE():
             tacticsList.append(z)
 
     for tacturi in tacticsList:
-        #tacticshref.append(str(baseURI) + str(tacturi))
-        tacticshref.append(str(tacturi))
+        if not validators.url(tacturi):
+            tacticshref.append(str(baseURI) + str(tacturi))
+        else:
+            tacticshref.append(str(tacturi))
 
     for tacturi in tacticshref:
         tacticsID.append(tacturi.split("/")[-1])

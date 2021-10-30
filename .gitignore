@@ -2,3 +2,5 @@ venv/*
 extra/*
 .idea/*
 .gitignore
+DetectionNavigator/.idea/*
+static/atomictests/linux/BACKUP-LINUX-atomic_red_team_automated_test.py
