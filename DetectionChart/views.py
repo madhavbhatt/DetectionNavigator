@@ -43,7 +43,6 @@ def index(request):
 #@login_required(login_url='/admin/')
 @login_required(login_url='/login/')
 def detvalue(request):
-
     ttp = TTP.objects.all()
     tac = Tactic.objects.all()
     tech = Techniques.objects.all()
@@ -51,12 +50,16 @@ def detvalue(request):
     tID = str(request.GET['tID'])
     tColor = str(request.GET['tColor'])
 
-    db_connection = mysql.connector.connect(host="localhost", user="django", passwd="django-user-password",database="detectionnav")
-    db_cursor = db_connection.cursor()
-    db_cursor.execute("UPDATE DetectionChart_techniques SET techColor='" + tColor + "' WHERE techniqueId = '"+ tID +"'")
-    db_connection.commit()
+    tidreg1 = re.compile(r'T\d{4}')
+    tidreg2 = re.compile(r'T\d{4}.\d{3}')
 
-    all_dict = {'ttp': ttp , 'tac':tac, 'tech':tech }
+    if tidreg1.fullmatch(tID) or tidreg2.fullmatch(tID):
+        db_connection = mysql.connector.connect(host="localhost", user="django", passwd="django-user-password", database="detectionnav")
+        db_cursor = db_connection.cursor()
+        db_cursor.execute("""UPDATE DetectionChart_techniques SET techColor= %(tcolor)s WHERE techniqueId = %(tid)s""", {'tcolor': tColor, 'tid': tID})
+        db_connection.commit()
+
+    all_dict = {'ttp': ttp, 'tac': tac, 'tech': tech}
     return render(request, 'base.html', all_dict)
 
 @login_required(login_url='/login/')
